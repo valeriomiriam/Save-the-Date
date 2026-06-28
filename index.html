@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date - Valerio & Miriam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Simulatore Smartphone */
+        .phone-container {
+            width: 100%;
+            max-width: 412px;
+            height: 100%;
+            max-height: 892px;
+            position: relative;
+            overflow: hidden;
+            background: #fdfbf7;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (min-width: 415px) {
+            .phone-container {
+                border: 12px solid #2d2d30;
+                border-radius: 48px;
+            }
+        }
+
+        /* Sfondi */
+        .bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), filter 0.5s ease;
+        }
+
+     #lock-bg {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 35%), url('https://i.postimg.cc/J4B5b61X/Foto-savethedate-add.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Filtri ottimizzati e resi compatibili anche per PC */
+            -webkit-filter: contrast(1.12) brightness(1.05) saturate(1.1);
+            filter: contrast(1.12) brightness(1.05) saturate(1.1);
+     
+        }
+
+        #main-bg {
+            background-image: url('https://i.postimg.cc/J4B5b61X/Foto-savethedate-add.jpg');
+            filter: blur(20px) brightness(0.9);
+            transform: translateY(100%);
+            z-index: 2;
+        }
+
+        /* SCHERMATA DI BLOCCO */
+        .lock-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px 24px 40px 24px;
+            transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        .lock-header {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+     .lock-time {
+            font-size: 74px;
+            font-weight: 200; /* Super sottile e sofisticato */
+            line-height: 1;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            letter-spacing: 2px; /* Spazia leggermente i numeri per dare un'aria "luxury" */
+        }
+
+        .lock-date {
+            font-size: 15px; /* Leggermente più piccolo per fare contrasto con l'ora */
+            font-weight: 400;
+            margin-top: 8px;
+            letter-spacing: 4px; /* Lettere molto spaziate, tipico delle partecipazioni moderne */
+            text-transform: uppercase; /* Forzo il maiuscolo elegante */
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Notifica Interattiva */
+        .notification-container {
+            margin-bottom: auto;
+            margin-top: 40px;
+            perspective: 1000px;
+        }
+
+        .notification {
+            background: rgba(253, 251, 247, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.4);
+            cursor: pointer;
+            animation: pulseNotification 2.5s infinite;
+            transform-origin: center;
+            transition: transform 0.2s ease;
+        }
+
+        .notification:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulseNotification {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+            50% { transform: scale(1.02); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #615e58;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notif-icon {
+            width: 18px;
+            height: 18px;
+            background: #c5a059;
+            border-radius: 5px;
+            margin-right: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 10px;
+        }
+
+        .notif-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c2519;
+            margin-bottom: 2px;
+        }
+
+        .notif-body {
+            font-size: 14px;
+            color: #4a4235;
+            line-height: 1.3;
+        }
+
+        .lock-footer {
+            text-align: center;
+            color: #ffffff; /* Cambiato in bianco puro per massimo contrasto */
+            font-size: 14px; /* Ingrandito appena un millimetro per migliorarne la lettura */
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9); /* Doppia ombra nera per farlo leggere perfettamente sulla roccia */
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Animazione FaceID */
+        .faceid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .faceid-icon {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #c5a059;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #c5a059;
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .faceid-text {
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* SCHERMATA INTERNA (SAVE THE DATE) */
+        .content-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 24px;
+            color: #3d3321;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        .content-screen::-webkit-scrollbar { display: none; }
+
+       .card {
+            background: rgba(253, 251, 247, 0.9);
+            border-radius: 32px;
+            padding: 32px 24px 42px 24px; /* Aumentato solo l'ultimo valore da 24px a 42px per dare spazio in fondo */
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.6);
+            margin: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .title-top {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #8a744a;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .names {
+            font-size: 44px; /* Ridotto leggermente da 50px */
+            font-weight: 300;
+            color: #2c2519;
+            margin-bottom: 12px; /* Ridotto da 24px */
+            letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .names span {
+            display: block;
+            font-size: 24px;
+            margin: 4px 0;
+            color: #c5a059;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: #c5a059;
+            margin: 0 auto 24px auto;
+        }
+
+        .date-main {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #2c2519;
+            margin-bottom: 6px;
+        }
+
+        .time-main {
+            font-size: 16px;
+            color: #615e58;
+            margin-bottom: 24px;
+        }
+
+        .details-box {
+            background: rgba(197, 160, 89, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 28px;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #4a4235;
+        }
+        .details-box p strong {
+            color: #2c2519;
+        }
+
+        /* Countdown */
+        .countdown-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a744a;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px; /* Ridotto lo spazio sotto il countdown da 36px a 20px */
+        }
+
+        .countdown-item {
+            background: #ffffff;
+            border-radius: 14px;
+            min-width: 60px;
+            padding: 10px 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .count-num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #c5a059;
+        }
+
+        .count-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #80796e;
+            margin-top: 2px;
+        }
+
+        /* Pulsanti */
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #c5a059;
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+        }
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #8a744a;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+        }
+        .btn-secondary:active {
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 37, 25, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .modal-box {
+            background: #fdfbf7;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 28px;
+            width: 100%;
+            padding: 28px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #2c2519;
+            margin-bottom: 6px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            color: #8a744a;
+            margin-bottom: 24px;
+        }
+
+        .modal-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-choice {
+            background: #ffffff;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            color: #4a4235;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .btn-choice:active {
+            background: rgba(197, 160, 89, 0.08);
+            border-color: #c5a059;
+        }
+
+        .btn-close {
+            font-size: 13px;
+            color: #80796e;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Stato sbloccato */
+        .unlocked #lock-bg {
+            transform: translateY(-100%);
+        }
+        .unlocked #main-bg {
+            transform: translateY(0);
+        }
+        .unlocked .lock-screen {
+            transform: translateY(-100%);
+        }
+        .unlocked .content-screen {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <div id="lock-bg" class="bg-layer"></div>
+        <div id="main-bg" class="bg-layer"></div>
+
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-header">
+                <div class="lock-time">16:00</div>
+                <div class="lock-date">Martedì, 29 Giugno</div>
+            </div>
+
+            <div class="notification-container">
+                <div class="notification" onclick="unlockPhone()">
+                    <div class="notif-header">
+                        <div class="notif-icon">💍</div>
+                        <div>Calendario • Adesso</div>
+                    </div>
+                    <div class="notif-title">Nuovo Evento Programmato</div>
+                    <div class="notif-body">Hai un invito speciale da aprire. Tocca qui per visualizzare i dettagli.</div>
+                </div>
+            </div>
+
+            <div class="lock-footer">
+                👆 Tocca la notifica per sbloccare
+            </div>
+        </div>
+
+        <div class="faceid-overlay" id="faceidOverlay">
+            <div class="faceid-icon">🔓</div>
+            <div class="faceid-text">Sblocco in corso...</div>
+        </div>
+
+        <div class="content-screen" id="contentScreen">
+            <div class="card">
+                <div class="title-top">Save the Date</div>
+                
+                <h1 class="names">Valerio <span>&</span> Miriam</h1>
+                
+                <div class="divider"></div>
+                
+                <div class="date-main">29 GIUGNO 2027</div>
+                <div class="time-main">Ore 16:00</div>
+
+                <div class="details-box">
+                    <p> ⛪ Cerimonia: <span style="font-weight: 800; color: #2c2519; text-shadow: 0.5px 0px 0px #2c2519, -0.5px 0px 0px #2c2519;">Soriano Calabro</span><br>
+                    <p> 🥂 Ricevimento: <span style="font-weight: 800; color: #2c2519; text-shadow: 0.5px 0px 0px #2c2519, -0.5px 0px 0px #2c2519;">Pizzo</span></p>
+                    <p style="margin-top: 8px; font-size: 13px; font-style: italic; color: #80796e;">Seguirà invito ufficiale con tutti i dettagli.</p>
+                </div>
+
+                <div class="countdown-title">Mancano ancora</div>
+                <div class="countdown">
+                    <div class="countdown-item"><div class="count-num" id="days">00</div><div class="count-label">Giorni</div></div>
+                    <div class="countdown-item"><div class="count-num" id="hours">00</div><div class="count-label">Ore</div></div>
+                    <div class="countdown-item"><div class="count-num" id="minutes">00</div><div class="count-label">Min</div></div>
+                    <div class="countdown-item"><div class="count-num" id="seconds">00</div><div class="count-label">Sec</div></div>
+                </div>
+
+                <div class="btn-stack">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Valerio+%26+Miriam&dates=20270629T160000/20270630T020000&details=Save+the+Date!+Matrimonio+di+Valerio+and+Miriam.+Cerimonia+a+Soriano+Calabro+e+ricevimento+a+Pizzo.&location=Soriano+Calabro,+Vibo+Valentia,+Italia" target="_blank" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <!-- Icona calendario con 29 GIU -->
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+        <rect x="3" y="4" width="18" height="17" rx="4" fill="#ffffff"/>
+        <path d="M3 8H21V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V8Z" fill="#8a744a"/>
+        <rect x="3" y="4" width="18" height="17" rx="4" stroke="#8a744a" stroke-width="2"/>
+        <line x1="8" y1="2" x2="8" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
+        <line x1="16" y1="2" x2="16" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
+        <!-- Giorno -->
+        <text x="12" y="14" fill="#2c2519" font-size="6.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">29</text>
+        <!-- Mese -->
+        <text x="12" y="19" fill="#8a744a" font-size="4.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">GIU</text>
+    </svg>
+    Aggiungi al Calendario
+</a>
+                    
+                    <a href="#" onclick="scegliSposo(event)" class="btn btn-secondary">
+                        💬 Scrivi agli sposi
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="sposiModal" onclick="closeSposiModal()">
+            <div class="modal-box" onclick="event.stopPropagation()">
+                <div class="modal-title">Scegli chi contattare</div>
+                <div class="modal-subtitle">A chi vuoi scrivere su WhatsApp?</div>
+                
+                <div class="modal-choices">
+                    <a href="https://wa.me/393292554259?text=Ciao%20Miriam!%20Ho%20ricevuto%20il%20Save%20the%20Date!%20Grazie%20dell'invito,%20non%20vediamo%20l'ora!" target="_blank" class="btn btn-choice" onclick="closeSposiModal()">
+                        💬 Scrivi a Miriam
+                    </a>
+                    <a href="https://wa.me/393406930051?text=Ciao%20Valerio!%20Ho%20ricevuto%20il%20Save%20the%20Date!%20Grazie%20dell'invito,%20non%20vediamo%20l'ora!" target="_blank" class="btn btn-choice" onclick="closeSposiModal()">
+                        💬 Scrivi a Valerio
+                    </a>
+                </div>
+                
+                <button class="btn-close" onclick="closeSposiModal()">Chiudi</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function scegliSposo(event) {
+            event.preventDefault(); 
+            document.getElementById('sposiModal').classList.add('active');
+        }
+
+        function closeSposiModal() {
+            document.getElementById('sposiModal').classList.remove('active');
+        }
+
+        function unlockPhone() {
+            const faceid = document.getElementById('faceidOverlay');
+            const container = document.querySelector('.phone-container');
+            
+            faceid.style.opacity = '1';
+            
+            setTimeout(() => {
+                faceid.style.opacity = '0';
+                container.classList.add('unlocked');
+            }, 1200);
+        }
+
+        const targetDate = new Date(2027, 5, 29, 16, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                document.querySelector('.countdown').innerHTML = "<div style='color:#c5a059; font-weight:600;'>È il grande giorno!</div>";
+                return;
+            }
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
