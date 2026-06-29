@@ -56,25 +56,25 @@
             transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), filter 0.5s ease;
         }
 
-    #lock-bg {
-    background-image: url('https://i.postimg.cc/0jrJLt3K/Foto-savethedate-finale.webp');
-    background-size: cover;
-    background-position: 85% 30%;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
+        #lock-bg {
+            background-image: url('https://i.postimg.cc/0jrJLt3K/Foto-savethedate-finale.webp');
+            background-size: cover;
+            background-position: 85% 30%;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
 
-#main-bg {
-    background-image: url('https://i.postimg.cc/0jrJLt3K/Foto-savethedate-finale.webp');
-    filter: blur(20px) brightness(0.9);
-    transform: translateY(100%);
-    z-index: 2;
-}
+        #main-bg {
+            background-image: url('https://i.postimg.cc/0jrJLt3K/Foto-savethedate-finale.webp');
+            filter: blur(20px) brightness(0.9);
+            transform: translateY(100%);
+            z-index: 2;
+        }
 
         /* SCHERMATA DI BLOCCO */
         .lock-screen {
@@ -97,20 +97,20 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-     .lock-time {
+        .lock-time {
             font-size: 74px;
-            font-weight: 200; /* Super sottile e sofisticato */
+            font-weight: 200;
             line-height: 1;
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-            letter-spacing: 2px; /* Spazia leggermente i numeri per dare un'aria "luxury" */
+            letter-spacing: 2px;
         }
 
         .lock-date {
-            font-size: 15px; /* Leggermente più piccolo per fare contrasto con l'ora */
+            font-size: 15px;
             font-weight: 400;
             margin-top: 8px;
-            letter-spacing: 4px; /* Lettere molto spaziate, tipico delle partecipazioni moderne */
-            text-transform: uppercase; /* Forzo il maiuscolo elegante */
+            letter-spacing: 4px;
+            text-transform: uppercase;
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
         }
 
@@ -184,11 +184,11 @@
 
         .lock-footer {
             text-align: center;
-            color: #ffffff; /* Cambiato in bianco puro per massimo contrasto */
-            font-size: 14px; /* Ingrandito appena un millimetro per migliorarne la lettura */
+            color: #ffffff;
+            font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9); /* Doppia ombra nera per farlo leggere perfettamente sulla roccia */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9);
             animation: bounce 2s infinite;
         }
 
@@ -255,10 +255,10 @@
         }
         .content-screen::-webkit-scrollbar { display: none; }
 
-       .card {
+        .card {
             background: rgba(253, 251, 247, 0.9);
             border-radius: 32px;
-            padding: 32px 24px 42px 24px; /* Aumentato solo l'ultimo valore da 24px a 42px per dare spazio in fondo */
+            padding: 32px 24px 42px 24px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.6);
@@ -279,10 +279,10 @@
         }
 
         .names {
-            font-size: 44px; /* Ridotto leggermente da 50px */
+            font-size: 44px;
             font-weight: 300;
             color: #2c2519;
-            margin-bottom: 12px; /* Ridotto da 24px */
+            margin-bottom: 12px;
             letter-spacing: 1px;
             font-family: 'Cormorant Garamond', serif;
         }
@@ -341,7 +341,7 @@
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 20px; /* Ridotto lo spazio sotto il countdown da 36px a 20px */
+            margin-bottom: 20px;
         }
 
         .countdown-item {
@@ -384,12 +384,14 @@
             text-decoration: none;
             transition: all 0.3s ease;
             text-align: center;
+            cursor: pointer;
         }
 
         .btn-primary {
             background: #c5a059;
             color: #ffffff;
             box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+            border: none;
         }
         .btn-primary:active {
             transform: translateY(2px);
@@ -570,21 +572,19 @@
                 </div>
 
                 <div class="btn-stack">
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Valerio+%26+Miriam&dates=20270629T160000/20270630T020000&details=Save+the+Date!+Matrimonio+di+Valerio+and+Miriam.+Cerimonia+a+Soriano+Calabro+e+ricevimento+a+Pizzo.&location=Soriano+Calabro,+Vibo+Valentia,+Italia" target="_blank" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-    <!-- Icona calendario con 29 GIU -->
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-        <rect x="3" y="4" width="18" height="17" rx="4" fill="#ffffff"/>
-        <path d="M3 8H21V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V8Z" fill="#8a744a"/>
-        <rect x="3" y="4" width="18" height="17" rx="4" stroke="#8a744a" stroke-width="2"/>
-        <line x1="8" y1="2" x2="8" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
-        <line x1="16" y1="2" x2="16" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
-        <!-- Giorno -->
-        <text x="12" y="14" fill="#2c2519" font-size="6.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">29</text>
-        <!-- Mese -->
-        <text x="12" y="19" fill="#8a744a" font-size="4.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">GIU</text>
-    </svg>
-    Aggiungi al Calendario
-</a>
+                    <button onclick="apriModalCalendario(event)" class="btn btn-primary" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <!-- Icona calendario con 29 GIU -->
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                            <rect x="3" y="4" width="18" height="17" rx="4" fill="#ffffff"/>
+                            <path d="M3 8H21V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V8Z" fill="#8a744a"/>
+                            <rect x="3" y="4" width="18" height="17" rx="4" stroke="#8a744a" stroke-width="2"/>
+                            <line x1="8" y1="2" x2="8" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="16" y1="2" x2="16" y2="5" stroke="#8a744a" stroke-width="2" stroke-linecap="round"/>
+                            <text x="12" y="14" fill="#2c2519" font-size="6.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">29</text>
+                            <text x="12" y="19" fill="#8a744a" font-size="4.5" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">GIU</text>
+                        </svg>
+                        Aggiungi al Calendario
+                    </button>
                     
                     <a href="#" onclick="scegliSposo(event)" class="btn btn-secondary">
                         💬 Scrivi agli sposi
@@ -593,6 +593,42 @@
             </div>
         </div>
 
+        <!-- MODAL CALENDARIO (CON ICONE REALI E CORRETTE) -->
+<div class="modal-overlay" id="calendarModal" onclick="chiudiModalCalendario()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-title">Salva la Data</div>
+        <div class="modal-subtitle">Quale calendario utilizzi?</div>
+        
+        <div class="modal-choices">
+            <!-- Google Calendar -->
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Valerio+%26+Miriam&dates=20270629T160000/20270630T020000&ctz=Europe/Rome&details=Save+the+Date!+Matrimonio+di+Valerio+e+Miriam.+Cerimonia+a+Soriano+Calabro+e+ricevimento+a+Pizzo.&location=Soriano+Calabro,+Vibo+Valentia,+Italia" target="_blank" class="btn btn-choice" onclick="chiudiModalCalendario()" style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                <!-- Icona Google Calendar Corretta -->
+                <svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                    <rect width="48" height="48" rx="10" fill="#1a73e8"/>
+                    <text x="24" y="33" fill="#ffffff" font-size="22" font-family="'Montserrat', sans-serif" font-weight="bold" text-anchor="middle">31</text>
+                </svg>
+                Google Calendar
+            </a>
+
+            <!-- Apple Calendar -->
+            <a href="#" class="btn btn-choice" onclick="scaricaIcs(event)" style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+                <!-- Icona Apple Calendar iOS Corretta -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 5px;">
+                    <rect width="24" height="24" rx="5" fill="#ffffff" stroke="#e5e5ea" stroke-width="1"/>
+                    <path d="M0 5C0 2.23858 2.23858 0 5 0H19C21.2614 0 23.155 1.50326 23.7431 3.5625H0.256897C0.0863926 4.02055 0 4.50289 0 5V5Z" fill="#ff3b30"/>
+                    <rect y="0" width="24" height="7" fill="#ff3b30" rx="2"/>
+                    <text x="12" y="5.5" fill="#ffffff" font-size="4.5" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="bold" text-anchor="middle">MAR</text>
+                    <text x="12" y="18.5" fill="#1c1c1e" font-size="11" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" text-anchor="middle">29</text>
+                </svg>
+                Apple Calendar
+            </a>
+        </div>
+        
+        <button class="btn-close" onclick="chiudiModalCalendario()">Chiudi</button>
+    </div>
+</div>
+
+        <!-- MODAL SPOSI -->
         <div class="modal-overlay" id="sposiModal" onclick="closeSposiModal()">
             <div class="modal-box" onclick="event.stopPropagation()">
                 <div class="modal-title">Scegli chi contattare</div>
@@ -621,6 +657,46 @@
 
         function closeSposiModal() {
             document.getElementById('sposiModal').classList.remove('active');
+        }
+
+        /* Gestione nuovo Modal Calendario */
+        function apriModalCalendario(event) {
+            event.preventDefault();
+            document.getElementById('calendarModal').classList.add('active');
+        }
+
+        function chiudiModalCalendario() {
+            document.getElementById('calendarModal').classList.remove('active');
+        }
+
+        /* Generatore dinamico file .ics (Apple Calendar) privo di errori di fuso orario */
+        function scaricaIcs(event) {
+            event.preventDefault();
+            
+            const icsData = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//ValerioMiriam//SaveTheDate//IT',
+                'BEGIN:VEVENT',
+                // Orari in formato UTC (Z) stabili per iOS (16:00 italiane con ora legale corrisponde alle 14:00 UTC)
+                'DTSTART:20270629T140000Z',
+                'DTEND:20270630T000000Z',
+                'SUMMARY:Matrimonio Valerio & Miriam',
+                'DESCRIPTION:Save the Date! Matrimonio di Valerio e Miriam. Cerimonia a Soriano Calabro e ricevimento a Pizzo.',
+                'LOCATION:Soriano Calabro\\, Vibo Valentia\\, Italia',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'matrimonio-valerio-miriam.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            chiudiModalCalendario();
         }
 
         function unlockPhone() {
